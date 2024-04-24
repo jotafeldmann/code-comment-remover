@@ -1,0 +1,19 @@
+{
+  "name": "code-comment-remover",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --loader ts-node/esm --inspect --watch index.ts",
+    "test": "node --loader ts-node/esm --inspect --test **.test.ts",
+    "test/watch": "node --loader ts-node/esm --inspect --watch --test **.test.ts"
+  },
+  "author": "Jorge Feldmann",
+  "type": "module",
+  "dependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5",
+    "ts-node": "^10.9.2",
+    "tslib": "^2.6.2"
+  }
+}
