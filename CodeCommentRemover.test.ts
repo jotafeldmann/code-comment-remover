@@ -70,5 +70,16 @@ describe('CodeCommentRemover', () => {
         const result = mockCodeWriter.getResult()
         assert.strictEqual(result, expectedOutput)
     })
+
+    it('should handle code with comments inside strings', () => {
+        const code = `const str = "// This is not a comment";`
+        const expectedOutput = `const str = "// This is not a comment";`
+        for (let i = 0; i < code.length; i++) {
+            codeCommentRemover.trimComment(code[i])
+        }
+        
+        const result = mockCodeWriter.getResult()
+        assert.strictEqual(result, expectedOutput)
+    })
 })
 
