@@ -10,13 +10,15 @@ const COMMENT_MULTI_LINE = COMMENT_MAYBE + COMMENT_MULTI_LINE_MAYBE
 const COMMENT_MULTI_LINE_END = COMMENT_MULTI_LINE_MAYBE + COMMENT_MAYBE
 const RESET = ''
 
+type Char = string
+
 
 export class CodeCommentRemover implements ICodeCommentRemover {
     private inComment: string = RESET
     private previousChar: string = RESET
     constructor(private codeWriter: ICodeWriter) { }
 
-    trimComment(char: string): void {
+    trimComment(char: Char): void {
         if (this.isCommentEnding(char)) {
             this.commentReset()
             return
@@ -55,44 +57,44 @@ export class CodeCommentRemover implements ICodeCommentRemover {
         this.writeChar(char)
     }
 
-    private isCommentEndingMaybe(char: string): boolean {
+    private isCommentEndingMaybe(char: Char): boolean {
         return this.isCommentEndingMaybeChar(char) && !!this.inComment
     }
 
-    private isCommentEndingMaybeChar(char: string): boolean {
+    private isCommentEndingMaybeChar(char: Char): boolean {
         return char === COMMENT_MULTI_LINE_MAYBE
     }
 
-    private writeChar(char: string): void {
+    private writeChar(char: Char): void {
         this.codeWriter.write(char)
         this.previousChar = char
     }
 
-    private isCommentSingleLine(char: string): boolean {
+    private isCommentSingleLine(char: Char): boolean {
         return (this.previousChar + char) === COMMENT_SINGLE_LINE
     }
 
-    private isCommentSingleLineEnding(char: string): boolean {
+    private isCommentSingleLineEnding(char: Char): boolean {
         return char === COMMENT_SINGLE_LINE_END && this.inComment === COMMENT_SINGLE_LINE
     }
     
-    private isCommentMultiLine(char: string): boolean {
+    private isCommentMultiLine(char: Char): boolean {
         return (this.previousChar + char) === COMMENT_MULTI_LINE
     }
 
-    private isCommentMultiLineEnding(char: string): boolean {
+    private isCommentMultiLineEnding(char: Char): boolean {
         return this.inComment === COMMENT_MULTI_LINE && (this.previousChar + char) === COMMENT_MULTI_LINE_END
     }
 
-    private isCommentEnding(char: string): boolean {
+    private isCommentEnding(char: Char): boolean {
         return this.isCommentSingleLineEnding(char) || this.isCommentMultiLineEnding(char)
     }
 
-    private isCommentMaybe(char: string): boolean {
+    private isCommentMaybe(char: Char): boolean {
         return this.isCommentMaybeChar(char) && this.inComment == RESET
     }
 
-    private isCommentMaybeChar(char: string): boolean {
+    private isCommentMaybeChar(char: Char): boolean {
         return char === COMMENT_MAYBE || char === COMMENT_MULTI_LINE_MAYBE
     }
 
