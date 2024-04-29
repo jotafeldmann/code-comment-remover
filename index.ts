@@ -21,6 +21,10 @@ comment
 */
 const x = 5;
 `
+
+,`
+const str = "// This is not a comment"
+`
 ]
 
 const results:string[] = []
