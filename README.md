@@ -1,6 +1,8 @@
 # Code Comment Remover
 
 - Author: [Jorge Feldmann](https://github.com/jotafeldmann)
+- Repo: [https://github.com/jotafeldmann/code-comment-remover](https://github.com/jotafeldmann/code-comment-remover)
+- Test online: [https://replit.com/@jotafeldmann/code-comment-remover#index.ts > shell > npm test > npm start](https://replit.com/@jotafeldmann/code-comment-remover#index.ts)
 
 ## Scope of the task
 
