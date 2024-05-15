@@ -1,4 +1,4 @@
-# Code Comment Remover
+# Code Comment Remover [![Node.js CI](https://github.com/jotafeldmann/code-comment-remover/actions/workflows/node.js.yml/badge.svg)](https://github.com/jotafeldmann/code-comment-remover/actions/workflows/node.js.yml)
 
 - Author: [Jorge Feldmann](https://github.com/jotafeldmann)
 - Repo: [https://github.com/jotafeldmann/code-comment-remover](https://github.com/jotafeldmann/code-comment-remover)
