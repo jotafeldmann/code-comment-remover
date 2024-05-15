@@ -9,16 +9,35 @@ const COMMENT_SINGLE_LINE_END = '\n'
 const COMMENT_MULTI_LINE = COMMENT_MAYBE + COMMENT_MULTI_LINE_MAYBE
 const COMMENT_MULTI_LINE_END = COMMENT_MULTI_LINE_MAYBE + COMMENT_MAYBE
 const RESET = ''
+const STRING_TOKENS = ["'", '"']
 
 type Char = string
 
 
 export class CodeCommentRemover implements ICodeCommentRemover {
     private inComment: string = RESET
+    private inString: string = RESET
     private previousChar: string = RESET
     constructor(private codeWriter: ICodeWriter) { }
 
     trimComment(char: Char): void {
+        if (this.isStringSectionEnd(char)) {
+            this.stringReset()
+            this.writeChar(char)
+            return
+        }
+
+        if (this.isStringSection()) {
+            this.writeChar(char)
+            return
+        }
+
+        if (this.isStringBeginning(char)) {
+            this.inString = char
+            this.writeChar(char)
+            return
+        }
+
         if (this.isCommentEnding(char)) {
             this.commentReset()
             return
@@ -55,6 +74,22 @@ export class CodeCommentRemover implements ICodeCommentRemover {
         }
 
         this.writeChar(char)
+    }
+
+    private stringReset(): void {
+        this.inString = RESET
+    }
+
+    private isStringSection(): boolean {
+        return !!this.inString
+    }
+
+    private isStringBeginning(char: Char): boolean {
+        return STRING_TOKENS.includes(char)
+    }
+
+    private isStringSectionEnd(char: Char): boolean {
+        return this.isStringSection() && char === this.inString
     }
 
     private isCommentEndingMaybe(char: Char): boolean {
